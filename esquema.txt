@@ -1,0 +1,27 @@
+news-website/
+├── admin/
+│   ├── index.php  ok
+│   ├── login.php  ok
+│   ├── logout.php  ok
+│   ├── manage_news.php  ok
+│   ├── manage_users.php
+│   ├── add_news.php  ok
+│   ├── edit_news.php  ok
+│   ├── delete_news.php  ok
+├── css/
+│   ├── style.css  ok
+├── js/
+│   ├── main.js
+├── img/
+├── includes/
+│   ├── config.php   ok
+│   ├── functions.php  ok
+│   ├── header.php  ok
+│   ├── footer.php  ok
+├── index.php  ok
+├── news.php  ok
+├── register.php  ok
+├── login.php  ok
+├── logout.php  ok
+├── profile.php  ok
+├── .htaccess  ok

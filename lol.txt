@@ -1,0 +1,255 @@
+<?php include '../includes/config.php'; ?>
+<?php include '../includes/functions.php'; ?>
+<?php redirectIfNotAdmin(); ?>
+<?php include '../includes/header.php'; ?>
+
+
+
+<div class="container">
+<h1 class="my-4 text-center " >Welcome to Admin Panel</h1>
+
+<div class="card">
+    <img class="card-img-top" src="holder.js/100x180/" alt="Title" />
+    <div class="card-body">
+        <h4 class="card-title">Manage News</h4>
+        <p class="card-text">News can manage news here.</p>
+        <a href="manage_news.php" class="btn btn-primary">Manage News</a>
+    </div>
+</div>
+
+<br>
+
+<div class="card">
+    <img class="card-img-top" src="holder.js/100x180/" alt="Title" />
+    <div class="card-body">
+        <h4 class="card-title">Manage Users</h4>
+        <p class="card-text">Users can manage users here.</p>
+        <a href="manage_users.php" class="btn btn-primary">Manage Users</a>
+    </div>
+</div>
+
+<br>
+
+<div class="card">
+    <img class="card-img-top" src="holder.js/100x180/" alt="Title" />
+    <div class="card-body">
+        <h4 class="card-title">News</h4>
+        <p class="card-text">See all news here.</p>
+        <a href="../index.php" class="btn btn-primary">See News</a>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+<?php include '../includes/footer.php'; ?>
+
+
+
+manage news 
+<?php include '../includes/config.php'; ?>
+<?php include '../includes/functions.php'; ?>
+<?php redirectIfNotAdmin(); ?>
+<?php include '../includes/header.php'; ?>
+
+<div class="container">
+    <h2 class="my-4">Manage News</h2>
+    <a href="add_news.php" class="btn btn-primary mb-4">Add News</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $stmt = $conn->prepare("SELECT * FROM news");
+            $stmt->execute();
+            while ($news = $stmt->fetch()) {
+                echo "<tr>";
+                echo "<td>{$news['id']}</td>";
+                echo "<td>{$news['title']}</td>";
+                echo "<td>{$news['content']}</td>";
+                echo "<td><img src='../img/{$news['image']}' alt='Image' width='100'></td>";
+                echo "<td>
+                        <a href='edit_news.php?id={$news['id']}' class='btn btn-warning'>Edit</a>
+                        <a href='delete_news.php?id={$news['id']}' class='btn btn-danger'>Delete</a>
+                      </td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
+
+<?php include '../includes/footer.php'; ?>
+
+
+profile 
+<?php include 'includes/config.php'; ?>
+<?php include 'includes/header.php'; ?>
+
+<div class="container">
+    <h2 class="my-4">Profile</h2>
+    <?php
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id = :id");
+        $stmt->bindParam(':id', $user_id);
+        $stmt->execute();
+        $user = $stmt->fetch();
+
+        echo "<p><strong>Username:</strong> {$user['username']}</p>";
+        echo "<p><strong>Email:</strong> {$user['email']}</p>";
+    } else {
+        echo "<p>Please log in to view your profile.</p>";
+    }
+    ?>
+</div>
+
+<?php include 'includes/footer.php'; ?>
+
+footer
+
+
+
+</div>
+
+<style>
+
+* {
+    font-family: "Outfit", sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.news-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.news-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.news-item:hover {
+    background-color: #f9f9f9;
+}
+
+.news-item img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.news-item h2 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.news-item h2 a:hover {
+    text-decoration: underline;
+}
+
+.single-news h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.single-news img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.single-news p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+
+.navbar .navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar .navbar-nav.ml-auto {
+    margin-left: auto;
+}
+
+.navbar .navbar-nav.mr-auto {
+    margin-right: auto;
+}
+
+.navbar {
+    height: 80px;
+}
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Separador -->
+<ul class="nav nav-tabs"id="navId"role="tablist"></ul>
+  <footer class="bg-white  text-center text-black">
+  <!-- Grid container -->
+
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0);">
+    © 2024 Copyright:
+    <a class="text-dark" href="index.php">MIJORA SAS</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+<script src="../js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.10/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
